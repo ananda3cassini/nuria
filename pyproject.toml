@@ -1,0 +1,17 @@
+[project]
+name = "nuria"
+version = "0.1.0"
+description = "Personal health copilot that explains lab reports and answers questions across dated results and prescriptions"
+readme = "README.md"
+authors = [
+    { name = "Ananda Cassini", email = "232387859+ananda3cassini@users.noreply.github.com" }
+]
+requires-python = ">=3.14"
+dependencies = []
+
+[project.scripts]
+nuria = "nuria:main"
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14.0"]
+build-backend = "uv_build"
