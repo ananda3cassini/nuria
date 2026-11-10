@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(/data/**)",
+      "Read(/.env)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": true,
+    "allowUnsandboxedCommands": false,
+    "autoAllowBashIfSandboxed": false
+  }
+}
