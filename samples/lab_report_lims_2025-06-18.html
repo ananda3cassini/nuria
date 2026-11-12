@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fictitious report – 18/06/2025</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e5e5e5; font-family: "Segoe UI", Calibri, "Helvetica Neue", Arial, sans-serif; color: #111; }
+  .page {
+    position: relative; width: 210mm; height: 296mm; margin: 10mm auto; padding: 10mm 12mm 24mm;
+    background: #fff; overflow: hidden; page-break-after: always; break-after: page;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+  @media print { body { background: #fff; } .page { margin: 0; } }
+
+  :root { --teal: #4d7c84; --teal-light: #8fb6bb; --red: #e23b2e; --pill: #d9dcdd; --panel: #f4f6f8; }
+
+  /* Header box */
+  .band { background: #d4d4d4; padding: 0 0 2mm; margin: 0 -12mm 3mm; padding: 0 12mm 2mm; }
+  .head-box {
+    display: flex; justify-content: space-between; align-items: center;
+    border: 2px solid var(--teal-light); border-radius: 2mm; background: #fff; padding: 5mm 7mm;
+  }
+  .head-box h1 { margin: 0; color: var(--teal); font-size: 20pt; font-weight: 600; letter-spacing: 0.02em; }
+  .logo { display: flex; align-items: center; gap: 2.5mm; }
+  .logo-mark {
+    width: 13mm; height: 13mm; border-radius: 50%; border: 2.5mm solid #bcd8dc;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 8pt; color: var(--teal);
+  }
+  .logo-text { font-size: 8pt; line-height: 1.25; color: #8a2b2b; text-align: right; }
+  .logo-text b { font-size: 12pt; color: #a33; font-weight: 600; }
+
+  .lab-patient { display: flex; justify-content: space-between; font-size: 8.5pt; line-height: 1.4; margin-bottom: 2mm; }
+  .lab-patient .patient { text-align: right; }
+  .lab-patient b { font-size: 9.5pt; }
+
+  /* Running strip on following pages */
+  .strip {
+    border-bottom: 1px solid #999; font-size: 8pt; color: #555; text-align: center;
+    letter-spacing: 0.04em; padding-bottom: 1mm; margin-bottom: 4mm;
+  }
+
+  /* Numerical results */
+  h2 {
+    color: var(--teal); text-decoration: underline; text-underline-offset: 1.2mm;
+    font-size: 13pt; font-weight: 600; margin: 3.5mm 0 1.5mm;
+  }
+  h3.sub {
+    color: var(--teal); text-decoration: underline; text-underline-offset: 1mm;
+    font-size: 11pt; font-weight: 600; margin: 2mm 0 1.5mm 2mm;
+  }
+  .r {
+    display: grid; grid-template-columns: 66mm 46mm 40mm 1fr; align-items: start;
+    border: 1px solid var(--pill); border-radius: 3mm; padding: 1.2mm 5mm; margin-bottom: 1.3mm;
+    font-size: 10pt; font-weight: 500;
+  }
+  .hi, .lo { color: var(--red); }
+  .hi::before { content: "↗ "; }
+  .lo::before { content: "↘ "; }
+  .small { display: block; font-size: 7pt; color: #111; line-height: 1.6; font-weight: 500; }
+  .inline-small { font-size: 7pt; color: #111; font-weight: 500; }
+
+  .validated { margin-top: 4mm; border: 1.5px solid var(--teal); border-radius: 3mm; padding: 3mm 5mm; font-size: 9.5pt; }
+  .validated b { color: var(--teal); }
+
+  /* Comments */
+  .title-center {
+    text-align: center; color: var(--teal); text-decoration: underline; text-underline-offset: 1.5mm;
+    font-size: 15pt; font-weight: 600; margin: 4mm 0 3mm;
+  }
+  .panel { background: var(--panel); border-radius: 3mm; box-shadow: 0 0.5mm 1.5mm rgba(0,0,0,0.18); padding: 4mm 6mm; }
+  .panel h4 { margin: 0 0 2mm; font-size: 12pt; font-weight: 600; }
+  .panel p, .card p { font-size: 9.5pt; line-height: 1.5; text-align: justify; margin: 0 0 2mm; }
+  .label-red { color: var(--red); font-weight: 700; text-decoration: underline; }
+  .label-dark { font-weight: 700; text-decoration: underline; }
+
+  .card {
+    background: var(--panel); border-radius: 3mm; box-shadow: 0 0.5mm 1.5mm rgba(0,0,0,0.18);
+    padding: 3.5mm 6mm 3mm; margin-bottom: 5mm;
+  }
+  .card h3 { margin: 0 0 2.5mm; font-size: 14pt; font-weight: 600; }
+  .card h3 .arrow-hi, .card h3 .arrow-lo { color: var(--red); font-weight: 400; }
+  .card .phys i { font-style: italic; }
+  .red { color: var(--red); font-weight: 700; }
+  .red-i { color: var(--red); font-style: italic; }
+
+  .food-wrap { background: #8e8e8e; padding: 2mm; margin: 2mm 0 2mm; }
+  table.foods { width: 100%; border-collapse: separate; border-spacing: 0; background: #dfe7f1; border-radius: 2mm; font-size: 8.5pt; }
+  table.foods td { padding: 1.1mm 2mm; text-align: center; border-bottom: 1px solid #fff; }
+  table.foods tr:last-child td { border-bottom: none; }
+  table.foods td:nth-child(2) { border-right: 3px solid #fff; }
+  table.foods td:nth-child(2), table.foods td:nth-child(4) { width: 15%; font-weight: 600; }
+  .food-caption { font-size: 7.5pt; color: #444; margin-top: -0.5mm; }
+
+  .refs { font-size: 7pt; color: #333; line-height: 1.45; }
+  .refs b { font-size: 8.5pt; color: #111; display: block; margin-bottom: 0.5mm; }
+
+  /* Page number and footer */
+  .pageno { position: absolute; right: 12mm; bottom: 16mm; font-size: 8.5pt; color: #555; }
+  .footer {
+    position: absolute; left: 12mm; right: 12mm; bottom: 8mm; border-top: 1px solid #999; padding-top: 2mm;
+    text-align: center; font-size: 9pt; font-weight: 700; letter-spacing: 0.1em; color: #b00000;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================ PAGE 1 ============================ -->
+<div class="page">
+  <div class="band">
+    <div class="head-box">
+      <h1>NUMERICAL RESULTS</h1>
+      <div class="logo">
+        <div class="logo-text"><b>Fictional Lab</b><br>MEDICAL TEST LABORATORY<br>EUROPE</div>
+        <div class="logo-mark">FLE</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lab-patient">
+    <div>
+      <b>Fictional Lab Europe</b><br>
+      Site A – 10 Example Street, 99999 Sampletown<br>
+      Site B – 5 Placeholder Avenue, 99998 Mocktown
+    </div>
+    <div class="patient">
+      <b>Mrs Jeanne EXEMPLE</b> – born 01/01/1990 – F<br>
+      Prescriber: Dr Martin TEST<br>
+      Ref. FLE-250618-0731-TEST – Sample date: 18/06/2025 – Report date: 27/06/2025
+    </div>
+  </div>
+
+  <h2>GENERAL INFORMATION</h2>
+  <div class="r"><div>Haemolysis index</div><div>Normal</div><div></div><div></div></div>
+  <div class="r"><div>Icterus index</div><div>Normal</div><div></div><div></div></div>
+  <div class="r"><div>Lipemic index</div><div>Normal</div><div></div><div></div></div>
+
+  <h2>HAEMATOLOGICAL BIOCHEMISTRY</h2>
+  <div class="r"><div>Iron</div><div>92</div><div>60 - 170</div><div>µg/dL</div></div>
+  <div class="r">
+    <div>Ferritin</div>
+    <div>38</div>
+    <div>30 - 200<span class="small">Health value: 50 - 200</span></div>
+    <div>µg/L</div>
+  </div>
+  <div class="r"><div>Transferrin</div><div>2.61</div><div>2.00 - 3.60</div><div>g/L</div></div>
+  <div class="r"><div>Transferrin saturation</div><div>25.0</div><div>20 - 45</div><div>%</div></div>
+
+  <h2>OXIDATIVE STRESS STATUS</h2>
+  <h3 class="sub">Vitamins</h3>
+  <div class="r"><div>25-OH Vitamin D</div><div class="lo">62</div><div>75 - 250</div><div>nmol/L</div></div>
+
+  <h3 class="sub">Trace elements</h3>
+  <div class="r"><div>Zinc</div><div>13.4</div><div>11.0 - 19.0</div><div>µmol/L</div></div>
+  <div class="r">
+    <div>Copper</div>
+    <div>
+      <span class="lo">12.1</span> <span class="inline-small">Alternative units: 76.9 µg/dL</span>
+      <span class="small">Reference values, men: 70.0 - 140.0 µg/dL</span>
+      <span class="small">Reference values, women: 80.0 - 152.0 µg/dL</span>
+    </div>
+    <div>12.6 - 24.0</div>
+    <div>µmol/L</div>
+  </div>
+  <div class="r"><div>Copper</div><div class="lo">76.9</div><div>80 - 152</div><div>µg/dL</div></div>
+  <div class="r"><div>Selenium</div><div class="hi">131</div><div>70 - 120</div><div>µg/L</div></div>
+
+  <div class="pageno">Page 1 / 4</div>
+  <div class="footer">FICTITIOUS DOCUMENT – TEST DATA</div>
+</div>
+
+<!-- ============================ PAGE 2 ============================ -->
+<div class="page">
+  <div class="strip">EXEMPLE JEANNE &nbsp;–&nbsp; Ref. FLE-250618-0731-TEST &nbsp;–&nbsp; Dr TEST MARTIN</div>
+
+  <h2>SALIVARY HORMONOLOGY</h2>
+  <div class="r"><div>Cortisol at wake-up</div><div>8.9</div><div>5.0 - 18.0</div><div>nmol/L</div></div>
+  <div class="r"><div>Cortisol wake-up + 30'</div><div>16.2</div><div>8.0 - 26.0</div><div>nmol/L</div></div>
+  <div class="r"><div>Cortisol 12h</div><div>3.6</div><div>1.8 - 5.5</div><div>nmol/L</div></div>
+  <div class="r"><div>Cortisol 16-20h</div><div class="hi">3.9</div><div>0.4 - 3.2</div><div>nmol/L</div></div>
+  <div class="r"><div>Cortisol 22h</div><div>0.9</div><div>0.3 - 1.5</div><div>nmol/L</div></div>
+
+  <div class="validated">
+    <b>Results validated by:</b> Dr Alice FICTIVE (Site A) &nbsp;–&nbsp; Dr Paul PLACEHOLDER (Site B)
+  </div>
+
+  <div class="title-center">COMMENTS</div>
+
+  <div class="panel">
+    <h4>Oxidative stress status</h4>
+    <div class="title-center" style="font-size:12pt;margin:1mm 0 3mm;">FOREWORD</div>
+    <p>
+      Your patient has had an oxidative stress assessment. This panel looks at the antioxidant
+      vitamins and trace elements that support the body's defences against free radicals, together
+      with a salivary cortisol curve describing the daily rhythm of the stress axis. Each result
+      should be read in the light of the clinical picture, diet and any supplements already taken.
+    </p>
+    <p>
+      When all markers lie within their reference ranges, defences are usually considered balanced.
+      One or more values outside these ranges suggest an imbalance that may justify dietary
+      adjustments or targeted supplementation, followed by a check after about three months.
+    </p>
+    <p style="margin-top:4mm;"><span class="label-red">Disturbed profile:</span></p>
+    <p>
+      Your patient's assessment shows four results outside the reference ranges (vitamin D, copper,
+      selenium and late-afternoon cortisol). Detailed comments are given below for each of them.
+    </p>
+    <p style="margin-top:4mm;"><span class="label-dark">About the nutritional advice:</span></p>
+    <p>
+      The advice and food tables below are general guidance. Amounts are given per 100 g of food
+      and are indicative only; a more complete table is available on request.
+    </p>
+  </div>
+
+  <div class="pageno">Page 2 / 4</div>
+  <div class="footer">FICTITIOUS DOCUMENT – TEST DATA</div>
+</div>
+
+<!-- ============================ PAGE 3 ============================ -->
+<div class="page">
+  <div class="strip">EXEMPLE JEANNE &nbsp;–&nbsp; Ref. FLE-250618-0731-TEST &nbsp;–&nbsp; Dr TEST MARTIN</div>
+
+  <div class="card">
+    <h3>25-OH Vitamin D <span class="arrow-lo">↘</span></h3>
+    <p class="phys"><b>Physiology:</b> <i>Vitamin D is produced mainly by the skin under sunlight and,
+      to a lesser extent, provided by food. It regulates calcium and phosphate absorption, contributes
+      to bone strength and also plays a part in muscle function and immunity.</i></p>
+    <p><span class="red">Decreased vitamin D:</span> Your patient's 25-OH vitamin D level is below the
+      reference range (62 nmol/L). This insufficiency is common at the end of winter and in people
+      with little sun exposure. It may be associated with fatigue, muscle weakness and reduced bone
+      mineralisation over time.</p>
+    <p><b>Nutritional and micronutritional advice:</b> It is recommended to <span class="red-i">increase</span>
+      moderate sun exposure and the consumption of oily fish and eggs. A cholecalciferol (vitamin D3)
+      supplement of 1,000 to 2,000 IU per day may be considered, with a check after 3 months.
+      Ten foods rich in vitamin D (µg per 100 g) are listed below.</p>
+    <div class="food-wrap">
+      <table class="foods">
+        <tr><td>Cod liver oil</td><td>250.0</td><td>Smoked herring</td><td>20.0</td></tr>
+        <tr><td>Wild salmon</td><td>12.0</td><td>Sardines in oil</td><td>8.5</td></tr>
+        <tr><td>Rainbow trout</td><td>7.0</td><td>Mackerel</td><td>6.0</td></tr>
+        <tr><td>Egg yolk</td><td>5.0</td><td>Canned tuna</td><td>3.5</td></tr>
+        <tr><td>UV-exposed mushrooms</td><td>3.0</td><td>Fortified margarine</td><td>2.5</td></tr>
+      </table>
+    </div>
+    <div class="food-caption">Indicative values, fictitious table for test purposes.</div>
+    <div class="refs" style="margin-top:2mm;">
+      <b>References</b>
+      1. Doe J, Sample A. Seasonal variation of vitamin D status in an imaginary population. Journal of Test Medicine 2019;12:34-40. (fictitious reference)
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Cu <span class="arrow-lo">↘</span> (Copper)</h3>
+    <p class="phys"><b>Physiology:</b> <i>Copper is a trace element required by several enzymes involved
+      in energy production, iron transport, connective tissue formation and antioxidant protection,
+      notably as a cofactor of superoxide dismutase.</i></p>
+    <p><span class="red">Decreased copper:</span> Your patient's copper level is slightly below the
+      reference range (12.1 µmol/L, i.e. 76.9 µg/dL). A low copper status may weaken antioxidant
+      defences and impair iron use. An excessive zinc intake should be ruled out, as zinc reduces
+      copper absorption.</p>
+    <p><b>Nutritional and micronutritional advice:</b> It is recommended to <span class="red-i">increase</span>
+      the consumption of copper-rich foods such as offal, shellfish, nuts and pulses. If needed, a
+      supplement of about 1 mg of copper per day, taken away from zinc, may be prescribed with a check
+      after 3 months. Ten foods rich in copper (mg per 100 g) are listed below.</p>
+    <div class="food-wrap">
+      <table class="foods">
+        <tr><td>Beef liver</td><td>12.0</td><td>Oysters</td><td>4.5</td></tr>
+        <tr><td>Cocoa powder</td><td>3.8</td><td>Cashew nuts</td><td>2.1</td></tr>
+        <tr><td>Sesame seeds</td><td>1.6</td><td>Sunflower seeds</td><td>1.5</td></tr>
+        <tr><td>Hazelnuts</td><td>1.4</td><td>Dark chocolate</td><td>1.2</td></tr>
+        <tr><td>Buckwheat</td><td>1.1</td><td>Cooked lentils</td><td>0.3</td></tr>
+      </table>
+    </div>
+    <div class="food-caption">Indicative values, fictitious table for test purposes.</div>
+    <div class="refs" style="margin-top:2mm;">
+      <b>References</b>
+      1. Roe R, Example B. Zinc–copper interactions in an invented cohort. Placeholder Clinical Nutrition 2021;8:101-109. (fictitious reference)
+    </div>
+  </div>
+
+  <div class="pageno">Page 3 / 4</div>
+  <div class="footer">FICTITIOUS DOCUMENT – TEST DATA</div>
+</div>
+
+<!-- ============================ PAGE 4 ============================ -->
+<div class="page">
+  <div class="strip">EXEMPLE JEANNE &nbsp;–&nbsp; Ref. FLE-250618-0731-TEST &nbsp;–&nbsp; Dr TEST MARTIN</div>
+
+  <div class="card">
+    <h3>Se <span class="arrow-hi">↗</span> (Selenium)</h3>
+    <p class="phys"><b>Physiology:</b> <i>Selenium is a trace element built into selenoproteins such as
+      glutathione peroxidase. It contributes to antioxidant defences, to thyroid hormone metabolism
+      and to immune function. The margin between adequate and excessive intake is narrow.</i></p>
+    <p><span class="red">Excess:</span> Your patient's selenium level is above the reference range
+      (131 µg/L). This most often results from supplements or a very high intake of Brazil nuts.
+      A persistent excess may cause digestive discomfort, brittle nails and hair loss.</p>
+    <p><b>Nutritional and micronutritional advice:</b> It is recommended to <span class="red-i">reduce</span>
+      the consumption of the richest foods listed below and to <span class="red-i">stop any supplement
+      containing selenium</span>, with a check after 3 months. Ten foods rich in selenium (µg per 100 g)
+      are listed below.</p>
+    <div class="food-wrap">
+      <table class="foods">
+        <tr><td>Brazil nuts</td><td>1900.0</td><td>Pork kidney</td><td>190.0</td></tr>
+        <tr><td>Tuna</td><td>90.0</td><td>Sardines</td><td>50.0</td></tr>
+        <tr><td>Shrimp</td><td>38.0</td><td>Cod</td><td>33.0</td></tr>
+        <tr><td>Eggs</td><td>30.0</td><td>Sunflower seeds</td><td>53.0</td></tr>
+        <tr><td>Chicken breast</td><td>22.0</td><td>Button mushrooms</td><td>9.0</td></tr>
+      </table>
+    </div>
+    <div class="food-caption">Indicative values, fictitious table for test purposes.</div>
+    <div class="refs" style="margin-top:2mm;">
+      <b>References</b>
+      1. Smith Q, Mock L. Selenium supplementation and blood levels in a fictional trial. Annals of Example Research 2018;5:77-83. (fictitious reference)
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Cortisol 16-20h <span class="arrow-hi">↗</span></h3>
+    <p class="phys"><b>Physiology:</b> <i>Cortisol follows a daily rhythm: it peaks about 30 minutes
+      after waking, then falls steadily during the day to reach its lowest level at night. This curve
+      helps the body adapt to stress and supports restful sleep.</i></p>
+    <p><span class="red">Excess:</span> Your patient's late-afternoon salivary cortisol is above the
+      reference range (3.9 nmol/L), while the morning and night values are normal. This pattern may
+      reflect stress or stimulation in the second half of the day and may delay falling asleep.</p>
+    <p><b>Nutritional and micronutritional advice:</b> It is recommended to <span class="red-i">limit</span>
+      caffeine after 2 pm, to keep regular meal and bedtime hours and to favour a calm evening routine.
+      A magnesium supplement may be considered. Ten common sources of caffeine (mg per 100 mL or 100 g)
+      are listed below.</p>
+    <div class="food-wrap">
+      <table class="foods">
+        <tr><td>Espresso</td><td>210.0</td><td>Cocoa powder</td><td>230.0</td></tr>
+        <tr><td>Filter coffee</td><td>40.0</td><td>Energy drink</td><td>32.0</td></tr>
+        <tr><td>Black tea</td><td>20.0</td><td>Dark chocolate</td><td>80.0</td></tr>
+        <tr><td>Green tea</td><td>12.0</td><td>Cola</td><td>10.0</td></tr>
+        <tr><td>Yerba mate</td><td>15.0</td><td>Milk chocolate</td><td>20.0</td></tr>
+      </table>
+    </div>
+    <div class="food-caption">Indicative values, fictitious table for test purposes.</div>
+    <div class="refs" style="margin-top:2mm;">
+      <b>References</b>
+      1. Brown K, Dummy S. Evening salivary cortisol and caffeine intake in invented volunteers. Imaginary Journal of Endocrinology 2020;3:15-22. (fictitious reference)
+    </div>
+  </div>
+
+  <div class="pageno">Page 4 / 4</div>
+  <div class="footer">FICTITIOUS DOCUMENT – TEST DATA</div>
+</div>
+
+</body>
+</html>

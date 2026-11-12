@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Compte rendu fictif – 12/03/2025</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e5e5e5; font-family: "Times New Roman", Times, serif; color: #000; }
+  .page {
+    position: relative; width: 210mm; height: 296mm; margin: 10mm auto; padding: 14mm 16mm 28mm;
+    background: #fff; overflow: hidden; page-break-after: always; break-after: page;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+  @media print { body { background: #fff; } .page { margin: 0; } }
+
+  /* Header (page 1) */
+  .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6mm; }
+  .lab-name { font-size: 15pt; font-weight: bold; color: #1a1aa6; }
+  .lab-info { font-size: 9pt; line-height: 1.35; }
+  .patient-box { border: 1px solid #000; padding: 3mm 4mm; font-size: 10pt; line-height: 1.45; width: 78mm; }
+  .patient-box .name { font-size: 12pt; font-weight: bold; }
+  .meta { font-size: 9.5pt; margin-bottom: 4mm; line-height: 1.4; }
+  .version { font-weight: bold; font-size: 11pt; margin-bottom: 1mm; }
+
+  /* Section band with dotted background */
+  .section {
+    margin: 4mm 0 1mm; padding: 1mm 0; text-align: center;
+    background-image: radial-gradient(#9a9a9a 0.6px, transparent 0.7px); background-size: 3px 3px;
+  }
+  .section span {
+    background: #fff; padding: 0 3mm; color: #1414e6; font-weight: bold; font-size: 17pt; letter-spacing: 0.45em;
+  }
+  .subsection { font-weight: bold; font-size: 11pt; margin: 3mm 0 0; }
+
+  .col-heads, .row, .alt {
+    display: grid; grid-template-columns: 70mm 20mm 20mm 36mm 1fr; column-gap: 2mm; align-items: baseline;
+  }
+  .col-heads { font-size: 10pt; margin-bottom: 2mm; }
+  .col-heads div:nth-child(4) { grid-column: 4; }
+  .dates { color: #1414e6; font-style: italic; font-size: 10.5pt; margin: 4mm 0 3mm; }
+
+  .result { margin: 0 0 3.5mm 6mm; }
+  .row { font-size: 12pt; }
+  .row .value { font-weight: bold; text-align: right; }
+  .row .range, .alt .range { color: #1414e6; font-size: 11pt; }
+  .row .unit, .alt .unit { font-size: 10.5pt; }
+  .out { font-weight: bold; }
+  .alt { font-size: 10.5pt; }
+  .alt .soit { text-align: right; font-style: italic; }
+  .alt .soit em { margin-right: 3mm; }
+  .method { font-size: 7.5pt; color: #555; margin-top: 0.5mm; }
+
+  /* Interpretation table */
+  .interp-title { font-weight: bold; font-size: 10.5pt; margin: 2mm 0 1mm 6mm; }
+  table.interp { margin-left: 6mm; border-collapse: collapse; font-size: 10pt; }
+  table.interp td, table.interp th { border: 1px solid #8ee6ee; padding: 0.6mm 2.5mm; font-weight: normal; }
+  table.interp td:not(:first-child), table.interp th:not(:first-child) { text-align: center; }
+
+  .admin { font-size: 10pt; line-height: 1.6; margin: 5mm 0 0 6mm; }
+  .admin b { display: block; margin-bottom: 1mm; }
+  .legend { font-size: 8.5pt; color: #555; margin: 4mm 0 0 6mm; }
+
+  /* Signature, page number, footer */
+  .signature { position: absolute; right: 30mm; bottom: 26mm; font-size: 10pt; line-height: 1.5; }
+  .pageno { position: absolute; right: 18mm; bottom: 19mm; font-weight: bold; font-size: 11pt; }
+  .footer {
+    position: absolute; left: 16mm; right: 16mm; bottom: 9mm; border-top: 1px solid #999; padding-top: 2mm;
+    text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 9pt; font-weight: bold;
+    letter-spacing: 0.1em; color: #b00000;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================ PAGE 1 ============================ -->
+<div class="page">
+  <div class="header">
+    <div>
+      <div class="lab-name">Laboratoire Fictif des Lilas</div>
+      <div class="lab-info">
+        1 rue Imaginaire<br>
+        00000 Testville<br>
+        Biologiste responsable : Dr Exemple
+      </div>
+    </div>
+    <div class="patient-box">
+      <div class="name">Mme Jeanne EXEMPLE</div>
+      Née le 01/01/1990 – Sexe : F<br>
+      Prescripteur : Dr Martin TEST<br>
+      N° dossier : 250312-0042-TEST
+    </div>
+  </div>
+
+  <div class="meta">
+    Prélèvement du 12/03/2025 à 08h05 (à jeun) – Compte rendu édité le 14/03/2025
+  </div>
+
+  <div class="version">VERSION **COMPLET**</div>
+
+  <div class="section"><span>HÉMATOLOGIE</span></div>
+  <div class="col-heads"><div></div><div></div><div></div><div>Intervalle de référence</div><div>Antécédents</div></div>
+
+  <div class="dates">Examens ci-dessous saisis le 12.03.2025 &nbsp;&nbsp;&nbsp;, validés le 12.03.2025</div>
+
+  <div class="result">
+    <div class="row"><div>HÉMATIES</div><div class="value">4,52</div><div class="unit">T/L</div><div class="range">3,90 à 5,20</div><div></div></div>
+    <div class="method">Impédancemétrie – automate fictif H-100</div>
+  </div>
+  <div class="result">
+    <div class="row"><div>HÉMOGLOBINE</div><div class="value">13,1</div><div class="unit">g/dL</div><div class="range">11,8 à 15,8</div><div></div></div>
+    <div class="method">Spectrophotométrie sans cyanure – automate fictif H-100</div>
+  </div>
+  <div class="result">
+    <div class="row"><div>HÉMATOCRITE</div><div class="value">39,6</div><div class="unit">%</div><div class="range">35,5 à 47,0</div><div></div></div>
+    <div class="method">Calcul – automate fictif H-100</div>
+  </div>
+  <div class="result">
+    <div class="row"><div>V.G.M.</div><div class="value">87,6</div><div class="unit">fL</div><div class="range">80,0 à 99,0</div><div></div></div>
+    <div class="method">Calcul – automate fictif H-100</div>
+  </div>
+
+  <div class="section"><span>BIOCHIMIE SANGUINE</span></div>
+  <div class="col-heads"><div></div><div></div><div></div><div>Intervalle de référence</div><div>Antécédents</div></div>
+
+  <div class="dates">Examens ci-dessous saisis le 12.03.2025 &nbsp;&nbsp;&nbsp;, validés le 13.03.2025</div>
+
+  <div class="result">
+    <div class="row"><div>GLYCÉMIE À JEUN</div><div class="value">0,91</div><div class="unit">g/L</div><div class="range">0,70 à 1,05</div><div></div></div>
+    <div class="alt"><div></div><div class="soit"><em>soit</em>5,05</div><div class="unit">mmol/L</div><div class="range">3,89 à 5,83</div><div></div></div>
+    <div class="method">Hexokinase – automate fictif C-200</div>
+  </div>
+  <div class="result">
+    <div class="row"><div>MAGNÉSIUM SÉRIQUE</div><div class="value">20,4</div><div class="unit">mg/L</div><div class="range">17,0 à 25,0</div><div></div></div>
+    <div class="alt"><div></div><div class="soit"><em>soit</em>0,84</div><div class="unit">mmol/L</div><div class="range">0,70 à 1,03</div><div></div></div>
+    <div class="method">Colorimétrie – automate fictif C-200</div>
+  </div>
+  <div class="result">
+    <div class="row"><div>FER SÉRIQUE</div><div class="value">10,2</div><div class="unit">µmol/L</div><div class="range">9,0 à 30,0</div><div></div></div>
+    <div class="alt"><div></div><div class="soit"><em>soit</em>57</div><div class="unit">µg/dL</div><div class="range">50 à 168</div><div></div></div>
+    <div class="method">Colorimétrie (ferrozine) – automate fictif C-200</div>
+  </div>
+  <div class="result">
+    <div class="row"><div>FERRITINE</div><div class="value out">12 *</div><div class="unit">µg/L</div><div class="range">15 à 150</div><div></div></div>
+    <div class="method">Immunoturbidimétrie – automate fictif C-200</div>
+  </div>
+
+  <div class="signature">Dr Exemple<br>Biologiste</div>
+  <div class="pageno">Page &nbsp; 1 / 2</div>
+  <div class="footer">DOCUMENT FICTIF – DONNÉES DE TEST</div>
+</div>
+
+<!-- ============================ PAGE 2 ============================ -->
+<div class="page">
+  <div class="meta">
+    Mme Jeanne EXEMPLE – Née le 01/01/1990 – N° dossier : 250312-0042-TEST – Prélèvement du 12/03/2025
+  </div>
+
+  <div class="section"><span>BIOCHIMIE SANGUINE</span></div>
+  <div class="col-heads"><div></div><div></div><div></div><div>Intervalle de référence</div><div>Antécédents</div></div>
+
+  <div class="dates">Examens ci-dessous saisis le 12.03.2025 &nbsp;&nbsp;&nbsp;, validés le 14.03.2025</div>
+
+  <div class="result">
+    <div class="row"><div>25-OH VITAMINE D (D2+D3)</div><div class="value out">18 *</div><div class="unit">ng/mL</div><div class="range">30 à 70</div><div></div></div>
+    <div class="alt"><div></div><div class="soit"><em>soit</em>45</div><div class="unit">nmol/L</div><div class="range">75 à 175</div><div></div></div>
+    <div class="method">Immunodosage par chimiluminescence – automate fictif I-300</div>
+  </div>
+
+  <div class="interp-title">Interprétation :</div>
+  <table class="interp">
+    <tr><th>25-OH vitamine D</th><th>ng/mL</th><th>nmol/L</th></tr>
+    <tr><td>Concentrations souhaitables</td><td>30 – 70</td><td>75 – 175</td></tr>
+    <tr><td>Insuffisance</td><td>10 – 30</td><td>25 – 75</td></tr>
+    <tr><td>Carence</td><td>&lt; 10</td><td>&lt; 25</td></tr>
+    <tr><td>Toxicité</td><td>&gt; 100</td><td>&gt; 250</td></tr>
+  </table>
+
+  <div class="admin">
+    <b>Information sur le remboursement du dosage de la vitamine D :</b>
+    Le dosage de la vitamine D n'est pris en charge par l'Assurance Maladie que lorsque l'ordonnance
+    mentionne l'une des indications prévues par la réglementation. En l'absence d'indication
+    précisée par le prescripteur, cet examen est hors nomenclature et reste à la charge du patient.
+  </div>
+
+  <div class="section"><span>HORMONOLOGIE</span></div>
+  <div class="col-heads"><div></div><div></div><div></div><div>Intervalle de référence</div><div>Antécédents</div></div>
+
+  <div class="dates">Examens ci-dessous saisis le 12.03.2025 &nbsp;&nbsp;&nbsp;, validés le 13.03.2025</div>
+
+  <div class="result">
+    <div class="row"><div>TSH ultrasensible</div><div class="value">1,86</div><div class="unit">mUI/L</div><div class="range">0,35 à 4,50</div><div></div></div>
+    <div class="method">Immunodosage par chimiluminescence – automate fictif I-300</div>
+  </div>
+
+  <div class="legend">* Résultat en dehors de l'intervalle de référence.</div>
+
+  <div class="signature">Dr Exemple<br>Biologiste</div>
+  <div class="pageno">Page &nbsp; 2 / 2</div>
+  <div class="footer">DOCUMENT FICTIF – DONNÉES DE TEST</div>
+</div>
+
+</body>
+</html>
