@@ -9,8 +9,9 @@ Local assistant that turns lab-report PDFs into readable summaries and answers q
 
 ## Layout
 - All application code lives in `src/nuria/` (modular monolith: one package, one sub-package per module)
-- Fake lab reports for tests and demos: `samples/` (to be created)
-- Docs: `docs/ARCHITECTURE.md`, `docs/DECISIONS.md` (to be created)
+- Fake lab reports for tests and demos: `samples/`
+- Docs: `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`
+- Modules: extraction, summaries, storage, chat, api (see docs/ARCHITECTURE.md). storage must not import any other Nuria module.
 
 ## Rules
 - Never read, open or list `data/` or `.env`: they hold real medical data and secrets.
